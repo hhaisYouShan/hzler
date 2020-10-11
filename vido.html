@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metas -->
+    <meta charset="utf-8">
+    <title>雷耳音乐</title>
+    <link rel="shortcut icon" href="index2/img/logo.ico">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="index2/layui/css/layui.css" rel="stylesheet" type="text/css" media="all">
+    <link href="index2/css/slide.css" type="text/css" rel="stylesheet" >
+
+    <script src="index2/layui/layui.js"></script>
+    <script src="index2/js/jquery.js"></script>
+   
+    <style>
+        *{padding: 0;
+            margin: 0;
+
+        }
+        .vido{
+            min-width: 1180px;
+
+        }
+        /*.main{*/
+        /*    width: 1180px;*/
+        /*    margin: 0 auto;*/
+        /*}*/
+        img{width: 100%;height: 100%}
+        li{list-style: none}
+
+        .ul-list{
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+        }
+        .ul-list li{
+            padding: 20px;
+            text-align: center;
+
+        }
+
+        .PlayEy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:130px;
+            height:130px;
+            border-radius: 100%;           
+        }
+        .PlayEyBack{ background: url(index2/mp3/img/爱与被爱的权利.JPG),url(index2/img/vidio/bg_center.png) no-repeat center;
+            background-size:100% 100%;
+        }
+
+        .Btn {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 95px;
+            height: 95px;
+            background-color: yellow;
+            background: url(index2/img/vidio/btn-bg.png) no-repeat;
+            animation: Btn-bg 3s linear infinite;
+        }
+
+        .Play {
+            position: absolute;
+            width: 29px;
+            height: 36px;
+            background: red;
+            background: url(index2/img/vidio/pause.png) no-repeat;
+            transition: .5s;
+        }
+
+        .btns-bg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*margin: 12px auto;*/
+            width:130px;
+            height:130px;
+        }
+
+        .textOverflow{
+           height: 130px;
+            overflow: scroll;
+        }
+        .layui-tab-card{
+            border: 0;
+        }
+
+        @keyframes Btn-bg {
+            from {}
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .MP4-play{
+            width: 64px;
+            height: 64px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: none;
+        }
+        header{
+            background-image: linear-gradient(#030303,#393D49);
+            color: rgba(255, 255, 255, .7);
+
+        }
+        .layui-tab-content{
+            min-width: 1180px;
+            margin: 0 auto;
+        }
+        .layui-tab-card >header> .layui-tab-title{
+            min-width: 1180px;
+            margin: 0 auto;
+
+            /*padding-left: 10%;*/
+
+        }
+        .layui-tab-card > header .layui-tab-title> li{
+            margin: 0;
+
+        }
+        .layui-tab-title .layui-this:after{
+            border: 0;
+        }
+
+        .layui-tab-card > header .layui-tab-title> .layui-this{
+            background-color: #393D49;
+            color: #FFFFFF;
+        }
+        .layui-tab-card > header>.layui-tab-title li:hover{
+            background-color: #393D49;
+            color: #fff;
+        }
+        .layui-table{
+            background-color:transparent;
+            color: rgba(255, 255, 255, .7);
+        }
+        .layui-table thead tr{
+            background-color:transparent;
+        }
+        .layui-table th, .layui-table td{
+            border: 1px solid #393D49;
+        }
+        .layui-table tbody tr:hover{
+            background-color: #0C0C0C;
+            color: #FFFFFF;
+            opacity: 0.5;
+        }
+        .mp4-Li{
+            width: 30%;
+            margin-left: 3%;
+
+        }
+        .font-div{
+            /*height: 150px;*/
+            overflow: scroll;
+            height: 20vh
+        }
+        .font-div h2{
+
+           color: #FFFFFF;
+            line-height: 50px;
+            padding-left: 20px;
+
+        }
+        .font-div h5{
+            padding: 0 20px;
+            color:rgba(255, 255, 255, .7) ;
+            text-indent: 2em;
+
+        }
+        /*@media all and (max-width: 990px) {*/
+        /*    .layui-tab-card > .layui-tab-title{*/
+        /*        pa*/
+        /*    }*/
+        /*    .vido{*/
+        /*        max-width: 990px;*/
+        /*        min-width: 600px;*/
+        /*    }*/
+        /*    .mp4-Li{*/
+        /*        width: 80%;*/
+        /*        display: flex;*/
+        /*        padding: 30px;*/
+
+        /*    }*/
+        /*    .font-div {*/
+        /*        padding: 40px;*/
+        /*        !* height: 150px; *!*/
+        /*        overflow: scroll;*/
+        /*        width: 100%;*/
+        /*    }*/
+
+        /*}*/
+
+        .showpic{
+
+            width: 70%;
+            height: 40%;
+            position: absolute;
+            background-color: #FFFFFF;
+            left: 15%;
+            z-index: 100;
+            top: 10%;
+            display: none;
+        }
+        @-webkit-keyframes mymove /*Safari and Chrome*/
+        {
+            from{
+                /*width: 50px;*/
+                /*height: 50px;*/
+            }
+            to{
+                width: 70%;
+                height: 40%;
+                left: 15%;
+                top: 10%;
+            }
+        }
+        @keyframes  mymove{
+            from{
+
+                /*width: 50px;*/
+                /*height: 50px;*/
+            }
+            to{
+
+                width: 70%;
+                height: 40%;
+                left: 15%;
+                top: 10%;
+            }
+
+        }
+        .back-CCC{
+            background-color: #cccccc;opacity: 0.5;position: absolute;width: 100%;height: 100%;top: 0;z-index: 50;
+            display: none;
+        }
+        .vclose{
+
+                position: absolute;
+                right: 1%;
+                border-radius: 100%;
+                cursor: pointer;
+            width: 25px;
+            height: 25px;
+        }
+.showpic2{
+    width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 100;
+}
+
+        .showpic2:hover{
+            /*transform: scale(6);*/
+            animation: 3s mymove infinite;
+            -webkit-animation: 3s mymove infinite;
+        }
+
+.goBack{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+    font-size: 14px;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    position: relative;
+    line-height: 40px;
+    min-width: 65px;
+    padding: 0 15px;
+    text-align: center;
+    cursor: pointer;
+
+    float: right;
+  
+    background-color: #018d75;border-radius: 20px;color: #FFFFFF;
+}
+
+
+   
+    </style>
+
+
+</head>
+<body style="background:url('index2/img/01.jpg') #020202 ;min-width: 1100px;">
+<div class="back-CCC" ></div>
+<div class="showpic" ></div>
+<div class="slide">
+    <ul class="icon">
+        <li class="qq"></li>
+        <li class="tel"></li>
+        <li class="wx"></li>
+    </ul>
+    <ul class="info">
+        <li class="qq">
+            <p>在线沟通，请点我<a href="http://wpa.qq.com/msgrd?v=3&uin=190755530&site=qq&menu=yes" target="_blank">在线咨询</a></p>
+        </li>
+        <li class="tel">
+            <p>咨询热线：<br>0571-87682310<br>客服qq：<br>190755530</p>
+        </li>
+        <li class="wx">
+            <div class="img"><img src="index2/img/positionImg/wx.png" /></div>
+        </li>
+    </ul>
+    <div class="backTop ng-scope"  title="返回顶部" style=""></div>
+</div>
+<!--<div class="showpic2"></div>-->
+<div class="vido">
+<!--    <h2>音乐 </h2>-->
+<!--    <ul class="layui-nav layui-nav-tree" lay-filter="test">-->
+<!--        <li class="layui-nav-item"><a href="">产品</a></li>-->
+<!--        <li class="layui-nav-item"><a href="">大数据</a></li>-->
+<!--        &lt;!&ndash; 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> &ndash;&gt;-->
+<!--    </ul>-->
+
+
+    <div class="layui-tab layui-tab-card main">
+        <header>
+            <ul class="layui-tab-title" style="border: 0">
+                <li class="layui-this" style="margin-left: 3%">录音棚</li>
+                <li>原创音乐定制</li>
+                <li>影视音乐混音</li>
+                <li>声音设计</li>
+
+                <a href="index.html"><div class="goBack" > 返回主页</div></a>
+
+
+            </ul>
+        </header>
+        <div class="layui-tab-content" style="padding: 10px 80px ">
+            <!--录音棚-->
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <colgroup>
+<!--                        <col width="100">-->
+<!--                        <col width="200">-->
+<!--                        <col width="400">-->
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>音乐简介</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody class="mp3Reprise" >
+                   
+                  
+                    </tbody>
+                </table>
+
+
+            </div>
+            <!--原创音乐定制-->
+            <div class="layui-tab-item">
+                <table class="layui-table">
+                    <colgroup>
+                        <!--                        <col width="100">-->
+<!--                        <col width="200">-->
+                        <!--                        <col width="400">-->
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>音乐简介</th>
+<!--                        <th>歌词</th>-->
+                    </tr>
+                    </thead>
+                    <tbody class="Mp3Original">
+                   
+                    </tbody>
+                </table>
+
+            </div>
+            <!--影视音乐混音-->
+            <div class="layui-tab-item ">
+                <ul style="display: flex;flex-wrap:wrap">
+                   <li class="mp4-Li" >
+                       <div style="position: relative">
+                           <video style="width: 100%;height: 100%;object-fit: fill" >
+                               <source src="index2/mp4/yzytx.mp4" type="video/mp4">
+                           </video>
+                           <div  class="MP4-play js-play-btn">
+                               <img src="index2/fontImg/play.png">
+                           </div>
+                       </div>
+                       <div class="font-div" >
+                           <h2>
+                               视频名称
+                           </h2>
+                           <h5 >
+                               原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制
+                           </h5>
+                       </div>
+
+                   </li>
+                    
+
+                </ul>
+
+
+            </div>
+            <!--声音设计-->
+            <div class="layui-tab-item">
+                <ul style="display: flex;flex-wrap:wrap">
+                    <li class="mp4-Li" >
+                        <div style="position: relative">
+                            <video style="width: 100%;height: 100%;object-fit: fill" poster="index2/mp3/img/imgDemo1.png" >
+                                <source src="index2/mp4/mp4Demo1.mp4" type="video/mp4" >
+                            </video>
+                            <div  class="MP4-play js-play-btn">
+                                <img src="index2/fontImg/play.png">
+                            </div>
+                        </div>
+                        <div class="font-div" >
+                            <h2>
+                                视频名称
+                            </h2>
+                            <h5 >
+                                原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制原创音乐定制
+                            </h5>
+                        </div>
+
+                    </li>
+                    
+
+                </ul>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="index2/js/underscore.js"></script>
+<script src="index2/js/lib.js"></script>
+<script src="index2/js/mp3ZDY.js"></script>
+<script>
+    $(document).ready(function(){
+    
+        //获取url 参数
+        function getUrlKey(name) {
+            let key, keyword = new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href);
+            key = keyword ? decodeURIComponent(keyword[1].replace(/\+/g, '%20')) : '';
+            return key;
+            // return decodeURIComponent(new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href)[1].replace(/\+/g, '%20')) || '';
+        }
+
+        let order_id=parseInt(getUrlKey('order_id'))-1;
+        
+            if(order_id){
+
+                    $(".layui-tab-item").each(function (index) {
+                        $(this).removeClass("layui-show");
+                        if(index==order_id){
+                            $(this).addClass("layui-show");
+                        }
+
+                    })
+                    $(".layui-tab-title li").each(function (index) {
+                        $(this).removeClass("layui-this");
+                        if(index==order_id){
+                            $(this).addClass("layui-this");
+                        }
+
+                    })
+            }
+
+
+            layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+    })
+
+    var i = 0;
+    // 视频------视频截图 ~~ 视频播放状态 ~~
+    const setMedia = function(video, scale = 0.8) {
+
+// -------------------------------------------------------------------------------------
+        //检测视频播放状态：
+        //播放按钮
+        let playBtn =  video.parentNode.childNodes[2].nextSibling;
+        let playBtnImg=playBtn.childNodes[1];
+        let mp4Src=video.childNodes[1];
+
+        //设置状态
+        function vidplaySate(e) {
+            if (video.paused) {
+                var videoSrc = mp4Src.src;//获取视频路径
+                $('.showpic').html("<video id=\"video\" style='width: 100%;'  src='"+videoSrc+"' preload=\"auto\" controls=\"controls\" autoplay=\"autoplay\"></video><img onClick=\"close1()\" class=\"vclose\" src=\"index2/img/vidio/gb.png\" width=\"25\" height=\"25\"/>");
+                $('.showpic').show();
+                $('.back-CCC').show();
+            } else {
+                video.pause();
+                playBtnImg.src='index2/fontImg/play.png';
+                // playBtn.classList.remove('pause');
+            }
+        }
+        //点击监听
+        video.addEventListener('click', vidplaySate, false);
+        playBtn.addEventListener('click', vidplaySate, false);
+        //结束监听
+        video.addEventListener('ended',function () {
+            playBtnImg.src='index2/fontImg/play.png';
+        });
+    };
+    //视频：
+    let videos = document.querySelectorAll('video');
+    videos.forEach((video) => {
+        setMedia(video);
+    });
+
+    
+
+
+    });
+
+    function close1(){
+        var v = document.getElementById('video');//获取视频节点
+        $('.showpic').hide();//点击关闭按钮关闭暂停视频
+        $('.back-CCC').hide();
+        if(v){
+            v.pause();
+        }
+
+        $('.showpic').html();
+    }
+
+    $(document).mouseup(function(e){
+        var _con = $('.showpic ');   // 设置目标区域
+        if(!_con.is(e.target) && _con.has(e.target).length === 0){ // Mark 1
+           close1();
+            // some code...   // 功能代码
+        }
+    });
+    
+
+
+</script>
+</html>
